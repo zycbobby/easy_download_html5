@@ -50,3 +50,26 @@ gulp.task('git-check', function(done) {
   }
   done();
 });
+
+var replace = require('replace');
+var replaceFiles = ['./www/js/app.js'];
+
+gulp.task('add-proxy', function() {
+    return replace({
+        regex: "http://es.misscatandzuozuo.info/mongoindex/thing/_search",
+        replacement: "http://localhost:8100/search",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+});
+
+gulp.task('remove-proxy', function() {
+    return replace({
+        regex: "http://localhost:8100/search",
+        replacement: "http://es.misscatandzuozuo.info/mongoindex/thing/_search",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+});
