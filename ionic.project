@@ -1,0 +1,10 @@
+{
+  "name": "EasyDownload",
+  "app_id": "34fc4634",
+  "proxies" : [
+    {
+        "path" : "/search",
+        "proxyUrl": "http://es.misscatandzuozuo.info/mongoindex/thing/_search"
+    }
+  ]
+}
