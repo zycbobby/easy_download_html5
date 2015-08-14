@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SearchCtrl', function ($scope, $http, $ionicModal, $timeout, Es) {
+angular.module('starter.controllers').controller('SearchCtrl', function ($scope, $ionicModal, $timeout, Es) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -16,16 +16,16 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         });
 
         $scope.articles = [{
-            title : 'title #1'
-        },{
-            title : 'title #2'
+            title: 'title #1'
+        }, {
+            title: 'title #2'
         }];
 
         $scope.search = function () {
-            Es.searchThing($scope.query.keyword).then(function(response) {
+            Es.searchThing($scope.query.keyword).then(function (response) {
                 var articles = [];
                 var hits = response.data.hits.hits;
-                for (var i = 0; i < 5 && i < hits.length; i++) {
+                for (var i = 0; i < hits.length; i++) {
                     var thing = hits[i]._source;
                     var score = hits[i]._score;
                     if (score > 4) {
@@ -41,35 +41,9 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             });
         };
 
-
-        //// Form data for the login modal
-        //$scope.loginData = {};
-        //
-        //// Create the login modal that we will use later
-        //$ionicModal.fromTemplateUrl('templates/login.html', {
-        //    scope: $scope
-        //}).then(function (modal) {
-        //    $scope.modal = modal;
-        //});
-        //
-        //// Triggered in the login modal to close it
-        //$scope.closeLogin = function () {
-        //    $scope.modal.hide();
-        //};
-        //
-        //// Open the login modal
-        //$scope.login = function () {
-        //    $scope.modal.show();
-        //};
-        //
-        //// Perform the login action when the user submits the login form
-        //$scope.doLogin = function () {
-        //    console.log('Doing login', $scope.loginData);
-        //
-        //    // Simulate a login delay. Remove this and replace with your login
-        //    // code if using a login system
-        //    $timeout(function () {
-        //        $scope.closeLogin();
-        //    }, 1000);
+        $scope.goTo = function(item) {
+            console.log(item);
+        };
     }
+
 );
