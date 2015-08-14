@@ -4,9 +4,9 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'starter.directives'])
+angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ngCordova', 'starter.controllers', 'starter.services', 'starter.directives'])
     .constant('EsEndpoint', {
-        url: 'http://localhost:8100/search'
+        url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -23,7 +23,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
             }
         });
     })
-
     .config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
 
@@ -33,7 +32,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                 templateUrl: 'templates/menu.html',
                 controller: 'AppCtrl'
             })
-
             .state('app.search', {
                 url: '/search',
                 views: {
@@ -43,7 +41,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
                     }
                 }
             })
-
             .state('app.subscribe', {
                 url: '/subscribe',
                 views: {

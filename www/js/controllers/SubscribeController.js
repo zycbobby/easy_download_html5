@@ -7,6 +7,12 @@ angular.module('starter.controllers').controller('SubscribeCtrl', function ($sco
         //$scope.$on('$ionicView.enter', function(e) {
         //});
 
-
+        $scope.subscriptions = [{
+            title : 's1',
+            active: true
+        },{
+            title : 's2',
+            active: false
+        }];
     }
 );

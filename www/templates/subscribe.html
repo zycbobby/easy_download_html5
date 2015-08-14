@@ -1,5 +1,13 @@
 <ion-view view-title="Subscribtion">
   <ion-content>
-    <h1>Coming soon</h1>
+      <li class="item item-toggle" ng-repeat=" s in subscriptions">
+          {{ s.title }}
+          <label class="toggle toggle-balanced">
+              <input type="checkbox" ng-model="s.active">
+              <div class="track">
+                  <div class="handle"></div>
+              </div>
+          </label>
+      </li>
   </ion-content>
 </ion-view>
