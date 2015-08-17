@@ -8,6 +8,9 @@ angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ng
     .constant('EsEndpoint', {
         url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
     })
+    .constant('EasyDownloadEndpoint', {
+        userUrl: 'http://172.26.142.29:9000/api/users'
+    })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

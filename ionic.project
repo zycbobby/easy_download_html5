@@ -5,6 +5,10 @@
     {
       "path": "/search",
       "proxyUrl": "http://es.misscatandzuozuo.info/mongoindex/thing/_search"
+    },
+    {
+        "path": "/users",
+        "proxyUrl": "http://172.26.142.29:9000/api/users"
     }
   ]
 }

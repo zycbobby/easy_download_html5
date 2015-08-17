@@ -55,9 +55,16 @@ var replace = require('replace');
 var replaceFiles = ['./www/js/app.js'];
 
 gulp.task('add-proxy', function() {
-    return replace({
+    replace({
         regex: "http://es.misscatandzuozuo.info/mongoindex/thing/_search",
         replacement: "http://localhost:8100/search",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+    replace({
+        regex: "http://172.26.142.29:9000/api/users",
+        replacement: "http://localhost:8100/users",
         paths: replaceFiles,
         recursive: false,
         silent: false
@@ -65,7 +72,14 @@ gulp.task('add-proxy', function() {
 });
 
 gulp.task('remove-proxy', function() {
-    return replace({
+    replace({
+        regex: "http://localhost:8100/users",
+        replacement: "http://172.26.142.29:9000/api/users",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+    replace({
         regex: "http://localhost:8100/search",
         replacement: "http://es.misscatandzuozuo.info/mongoindex/thing/_search",
         paths: replaceFiles,
