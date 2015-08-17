@@ -1,7 +1,7 @@
 <ion-view view-title="Subscribtion">
   <ion-content>
       <li class="item item-toggle" ng-repeat=" s in subscriptions">
-          {{ s.title }}
+          {{ s.parsedTerm }}
           <label class="toggle toggle-balanced">
               <input type="checkbox" ng-model="s.active">
               <div class="track">

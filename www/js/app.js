@@ -9,7 +9,9 @@ angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ng
         url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
     })
     .constant('EasyDownloadEndpoint', {
-        userUrl: 'http://172.26.142.29:9000/api/users'
+        userUrl: 'http://172.26.142.29:9000/api/users',
+        searchUrl: 'http://172.26.142.29:9000/api/historys/_search',
+        historyUrl: 'http://172.26.142.29:9000/api/historys'
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -45,6 +47,7 @@ angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ng
                 }
             })
             .state('app.subscribe', {
+                cache: false,
                 url: '/subscribe',
                 views: {
                     'menuContent': {

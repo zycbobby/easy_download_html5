@@ -9,6 +9,14 @@
     {
         "path": "/users",
         "proxyUrl": "http://172.26.142.29:9000/api/users"
+    },
+    {
+        "path": "/historys/_search",
+        "proxyUrl": "http://172.26.142.29:9000/api/historys/_search"
+    },
+    {
+        "path": "/historys",
+        "proxyUrl": "http://172.26.142.29:9000/api/historys"
     }
   ]
 }

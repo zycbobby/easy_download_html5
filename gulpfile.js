@@ -73,8 +73,8 @@ gulp.task('add-proxy', function() {
 
 gulp.task('remove-proxy', function() {
     replace({
-        regex: "http://localhost:8100/users",
-        replacement: "http://172.26.142.29:9000/api/users",
+        regex: "http://localhost:8100/",
+        replacement: "http://172.26.142.29:9000/api/",
         paths: replaceFiles,
         recursive: false,
         silent: false

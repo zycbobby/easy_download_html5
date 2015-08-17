@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SubscribeCtrl', function ($scope) {
+angular.module('starter.controllers').controller('SubscribeCtrl', function ($scope, historyService) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -8,11 +8,20 @@ angular.module('starter.controllers').controller('SubscribeCtrl', function ($sco
         //});
 
         $scope.subscriptions = [{
-            title : 's1',
+            parsedTerm : 's1',
             active: true
         },{
             title : 's2',
-            active: false
+            parsedTerm: false
         }];
+
+
+        $scope.loadHistory = function(){
+            historyService.loadHistory().then(function(histories) {
+                $scope.subscriptions = histories;
+            });
+        };
+
+        $scope.loadHistory();
     }
 );
