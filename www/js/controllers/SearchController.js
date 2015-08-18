@@ -45,7 +45,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                     platform: data.platform
                 };
 
-                userService.setUser(_user).then(function (user) {
+                userService.registerUser(_user).then(function (user) {
                     $rootScope.user = user;
                     $scope.hide();
                 });

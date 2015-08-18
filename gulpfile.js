@@ -63,8 +63,15 @@ gulp.task('add-proxy', function() {
         silent: false
     });
     replace({
-        regex: "http://172.26.142.29:9000/api/users",
+        regex: "http://172.26.142.29:9000/api/users*",
         replacement: "http://localhost:8100/users",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+    replace({
+        regex: "http://172.26.142.29:9000/api/historys",
+        replacement: "http://localhost:8100/historys",
         paths: replaceFiles,
         recursive: false,
         silent: false
@@ -73,8 +80,22 @@ gulp.task('add-proxy', function() {
 
 gulp.task('remove-proxy', function() {
     replace({
-        regex: "http://localhost:8100/",
-        replacement: "http://172.26.142.29:9000/api/",
+        regex: "http://localhost:8100/users",
+        replacement: "http://172.26.142.29:9000/api/users",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+    replace({
+        regex: "http://localhost:8100/historys",
+        replacement: "http://172.26.142.29:9000/api/historys",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+    replace({
+        regex: "http://localhost:8100/historys/_search",
+        replacement: "http://172.26.142.29:9000/api/historys/_search",
         paths: replaceFiles,
         recursive: false,
         silent: false

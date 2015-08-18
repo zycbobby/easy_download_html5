@@ -17,6 +17,14 @@
     {
         "path": "/historys",
         "proxyUrl": "http://172.26.142.29:9000/api/historys"
+    },
+    {
+        "path": "/historys?userId=55d292ed3e5db8e411d80355",
+        "proxyUrl": "http://172.26.142.29:9000/api/historys?userId=55d292ed3e5db8e411d80355"
+    },
+    {
+        "path": "/users/_subscribe",
+        "proxyUrl": "http://172.26.142.29:9000/api/users/_subscribe"
     }
   ]
 }

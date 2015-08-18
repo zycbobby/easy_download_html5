@@ -6,12 +6,23 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ngCordova', 'starter.controllers', 'starter.services', 'starter.directives'])
     .constant('EsEndpoint', {
-        url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
+        url: 'http://localhost:8100/search'
     })
     .constant('EasyDownloadEndpoint', {
-        userUrl: 'http://172.26.142.29:9000/api/users',
-        searchUrl: 'http://172.26.142.29:9000/api/historys/_search',
-        historyUrl: 'http://172.26.142.29:9000/api/historys'
+        userUrl: 'http://localhost:8100/users',
+        subscribeUrl: 'http://localhost:8100/users/_subscribe',
+        searchUrl: 'http://localhost:8100/historys/_search',
+        historyUrl: 'http://localhost:8100/historys'
+    })
+    .constant('debug', {
+        isDebug: true,
+        user: {
+            "_id" : "55d292ed3e5db8e411d80355",
+            "name" : "Test User",
+            "token" : "12345678",
+            "platform" : "android",
+            "__v" : 0
+        }
     })
     .run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
@@ -57,5 +68,5 @@ angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ng
                 }
             })
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/search');
+        $urlRouterProvider.otherwise('/app/subscribe');
     });
