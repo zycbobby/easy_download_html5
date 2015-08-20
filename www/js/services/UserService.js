@@ -1,7 +1,7 @@
 angular.module('starter.services')
     .service('userService', function ($http, $ionicUser, EasyDownloadEndpoint, debug, $q) {
 
-        this._user = _loadUserFromLocalStorage();
+        this._user = undefined;
 
         function notnull(o) {
             if (!o) {
@@ -25,7 +25,6 @@ angular.module('starter.services')
                 if (resp.status === 200 || resp.status === 201) {
                     self._user = resp.data;
                     self._user.subscribtions = self._user.subscribtions || [];
-                    _saveUserToLocalStorage(self._user);
                     defer.resolve(self._user);
                 } else {
                     defer.reject(resp);
@@ -33,15 +32,6 @@ angular.module('starter.services')
             });
             return defer.promise;
         };
-
-        function _saveUserToLocalStorage(user) {
-            var _userL = window.localStorage['_loginUser'];
-            return !_userL?undefined:JSON.parse(_userL);
-        }
-
-        function _loadUserFromLocalStorage() {
-            window.localStorage['_loginUser'] = JSON.stringify(user);
-        }
 
         /**
          * wrong... create subscribtion is just update the user, should not be another api
