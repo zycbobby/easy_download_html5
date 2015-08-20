@@ -18,6 +18,7 @@ angular.module('starter.services')
 
         this.onSearch = function(keyword) {
             self.histories.push(keyword);
+            _saveHistory(self.histories);
         };
 
         this.getHistories = function(){

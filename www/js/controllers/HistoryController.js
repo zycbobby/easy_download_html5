@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('HistoryCtrl', function ($scope, $rootScope, historyService) {
+angular.module('starter.controllers').controller('HistoryCtrl', function ($scope, $state, historyService) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -8,5 +8,10 @@ angular.module('starter.controllers').controller('HistoryCtrl', function ($scope
         //});
 
         $scope.histories = historyService.getHistories();
+
+        $scope.search = function (s) {
+            console.log('go to search ' + s);
+            $state.go('app.search');
+        }
     }
 );
