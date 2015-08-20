@@ -10,8 +10,7 @@ angular.module('starter.controllers').controller('HistoryCtrl', function ($scope
         $scope.histories = historyService.getHistories();
 
         $scope.search = function (s) {
-            console.log('go to search ' + s);
-            $state.go('app.search');
+            $state.go('app.search', { keyword : s} );
         }
     }
 );

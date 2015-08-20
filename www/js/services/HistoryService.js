@@ -17,7 +17,11 @@ angular.module('starter.services')
         }
 
         this.onSearch = function(keyword) {
-            self.histories.push(keyword);
+            var idx = self.histories.indexOf(keyword);
+            if (idx >= 0) {
+                self.histories.splice(idx, 1);
+            }
+            self.histories.unshift(keyword);
             _saveHistory(self.histories);
         };
 

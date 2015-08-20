@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SearchCtrl', function ($scope, $rootScope, $ionicModal, $timeout,
+angular.module('starter.controllers').controller('SearchCtrl', function ($scope, $rootScope, $stateParams,$ionicModal, $timeout,
                                                                          $ionicUser, $ionicPush, $ionicPlatform,
                                                                          $ionicLoading, userService, historyService, Es) {
 
@@ -55,16 +55,12 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             keyword: ''
         };
 
-        $scope.articles = [{
-            title: 'title #1'
-        }, {
-            title: 'title #2'
-        }];
+        $scope.articles = [];
 
         Es.listenSearchKeyword(historyService.onSearch);
 
-        $scope.search = function () {
-            Es.searchThing($scope.query.keyword).then(function (response) {
+        $scope.search = function (keyword) {
+            Es.searchThing(keyword).then(function (response) {
                 var articles = [];
                 var hits = response.data.hits.hits;
                 for (var i = 0; i < hits.length; i++) {
@@ -82,5 +78,9 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 $scope.articles = articles;
             });
         };
+
+        if ($stateParams.keyword) {
+            $scope.search($stateParams.keyword);
+        }
     }
 );

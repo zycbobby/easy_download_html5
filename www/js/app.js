@@ -49,7 +49,8 @@ angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ng
                 controller: 'AppCtrl'
             })
             .state('app.search', {
-                url: '/search',
+                cache: false,
+                url: '/search?keyword',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/search.html',
