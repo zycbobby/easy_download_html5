@@ -1,5 +1,14 @@
+/**
+ * This service is manupulate the history data
+ *
+ * It should be synchronized with local storage some how
+ */
 angular.module('starter.services')
     .service('historyService', function ($http, $ionicUser, EasyDownloadEndpoint, userService, $q) {
+
+        this.histories = _loadHistory();
+
+        var self = this;
 
         function notnull(o) {
             if (!o) {
@@ -7,30 +16,20 @@ angular.module('starter.services')
             }
         }
 
-        this.search = function(keyword) {
-            var defer = $q.defer();
-            var self = this;
-            var user = userService.getUser();
-            $http.post(EasyDownloadEndpoint.searchUrl, {
-                user : user,
-                keyword: keyword
-            }).then(function(resp){
-                if (resp.status !== 201) { defer.reject();}
-                defer.resolve();
-            });
-            return defer.promise;
+        this.onSearch = function(keyword) {
+            self.histories.push(keyword);
         };
 
-        this.loadHistory = function() {
-            var defer = $q.defer();
-            var self = this;
-            var user = userService.getUser();
-            $http.get(EasyDownloadEndpoint.historyUrl + '?userId=' + user._id).then(function(resp){
-                if (resp.status !== 200) {defer.reject(resp);}
-                defer.resolve(resp.data.map(function(history) {
-                    return history.query;
-                }));
-            });
-            return defer.promise;
+        this.getHistories = function(){
+            return this.histories;
+        };
+
+        function _loadHistory() {
+            var _h = localStorage['histories'];
+            return _h?JSON.parse(_h):[];
+        }
+
+        function _saveHistory(histories) {
+            localStorage['histories'] = JSON.stringify(histories);
         }
     });

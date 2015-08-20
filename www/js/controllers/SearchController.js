@@ -18,39 +18,37 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             $ionicLoading.hide();
         };
 
-        if (!$rootScope.user) {
-            $scope.show();
-            $ionicUser.identify({
-                user_id: $ionicUser.generateGUID()
-            }).then(function () {
-                // Register with the Ionic Push service.  All parameters are optional.
-                $ionicPush.register({
-                    canShowAlert: true, //Can pushes show an alert on your screen?
-                    canSetBadge: true, //Can pushes update app icon badges?
-                    canPlaySound: true, //Can notifications play a sound?
-                    canRunActionsOnWake: true, //Can run actions outside the app,
-                    onNotification: function (notification) {
-                        // Handle new push notifications here
-                        console.log(notification);
-                        return true;
-                    }
-                });
-            });
-
-            $rootScope.$on('$cordovaPush:tokenReceived', function (event, data) {
-                console.log('Ionic Push: Got token ', data.token, data.platform);
-                var _user = {
-                    name: data.token,
-                    token: data.token,
-                    platform: data.platform
-                };
-
-                userService.registerUser(_user).then(function (user) {
-                    $rootScope.user = user;
-                    $scope.hide();
-                });
-            });
-        }
+        //if (!$rootScope.user) {
+        //    $ionicUser.identify({
+        //        user_id: $ionicUser.generateGUID()
+        //    }).then(function () {
+        //        // Register with the Ionic Push service.  All parameters are optional.
+        //        $ionicPush.register({
+        //            canShowAlert: true, //Can pushes show an alert on your screen?
+        //            canSetBadge: true, //Can pushes update app icon badges?
+        //            canPlaySound: true, //Can notifications play a sound?
+        //            canRunActionsOnWake: true, //Can run actions outside the app,
+        //            onNotification: function (notification) {
+        //                // Handle new push notifications here
+        //                console.log(notification);
+        //                return true;
+        //            }
+        //        });
+        //    });
+        //
+        //    $rootScope.$on('$cordovaPush:tokenReceived', function (event, data) {
+        //        console.log('Ionic Push: Got token ', data.token, data.platform);
+        //        var _user = {
+        //            name: data.token,
+        //            token: data.token,
+        //            platform: data.platform
+        //        };
+        //
+        //        userService.registerUser(_user).then(function (user) {
+        //            $rootScope.user = user;
+        //        });
+        //    });
+        //}
 
 
         $scope.query = {
@@ -62,6 +60,8 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         }, {
             title: 'title #2'
         }];
+
+        Es.listenSearchKeyword(historyService.onSearch);
 
         $scope.search = function () {
             Es.searchThing($scope.query.keyword).then(function (response) {
@@ -81,13 +81,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 }
                 $scope.articles = articles;
             });
-
-            // add to history
-            historyService.search($scope.query.keyword);
-        };
-
-        $scope.goTo = function (item) {
-            console.log(item);
         };
     }
 );
