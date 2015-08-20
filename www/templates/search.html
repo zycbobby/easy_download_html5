@@ -9,8 +9,8 @@
 
             <a class="item item-thumbnail-left" href="{{ item.url }}" ng-repeat="item in articles">
                 <img src="{{ item.picUrl?item.picUrl:'img/ionic.png' }}">
-                <h2>{{ item.title }}</h2>
-                <p></p>
+                <h2 style="white-space: normal">{{ item.title }}</h2>
+                <smart-date time="item.createdAt"></smart-date>
             </a>
         </div>
     </ion-content>

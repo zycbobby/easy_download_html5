@@ -74,6 +74,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         };
 
         if ($stateParams.keyword) {
+            $scope.query.keyword = $stateParams.keyword;
             $scope.search($stateParams.keyword);
         }
 
