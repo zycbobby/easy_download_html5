@@ -60,19 +60,13 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         Es.listenSearchKeyword(historyService.onSearch);
 
         $scope.search = function (keyword) {
-            Es.searchThing(keyword).then(function (response) {
+            Es.searchThing(keyword).then(function (things) {
                 var articles = [];
-                var hits = response.data.hits.hits;
-                for (var i = 0; i < hits.length; i++) {
-                    var thing = hits[i]._source;
-                    var score = hits[i]._score;
+                for (var i = 0; i < things.length; i++) {
+                    var thing = things[i];
+                    var score = thing._score;
                     if (score > 4) {
-                        articles.push({
-                            title: thing.title,
-                            description: thing.title,
-                            picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
-                            url: thing.source
-                        });
+                        articles.push(convertThingToArticle(thing));
                     }
                 }
                 $scope.articles = articles;
@@ -81,6 +75,31 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
 
         if ($stateParams.keyword) {
             $scope.search($stateParams.keyword);
+        }
+
+        $scope.$on('$ionicView.leave', function(){
+            Es.removeListener(historyService.onSearch);
+        });
+
+        Es.getRecentThing().then(function(things) {
+            var articles = [];
+            for (var i = 0; i < things.length; i++) {
+                var thing = things[i];
+                articles.push(convertThingToArticle(thing));
+
+            }
+            $scope.articles = articles;
+        });
+
+
+        function convertThingToArticle(thing) {
+            return {
+                title: thing.title,
+                description: thing.title,
+                picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
+                url: thing.source,
+                createdAt : new Date(thing.createdAt)
+            };
         }
     }
 );
