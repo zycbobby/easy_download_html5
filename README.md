@@ -4,6 +4,8 @@
 
 Ionic implementation of easy download client
 
+Download app [here](https://github.com/zycbobby/easy_download_html5/releases)
+
 Notice: This project will be rewritten by react-native after it was released.
 
 # Functions
