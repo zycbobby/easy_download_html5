@@ -7,6 +7,7 @@ angular.module('starter.services')
     .service('historyService', function ($http, $ionicUser, EasyDownloadEndpoint, userService, $q) {
 
         this.histories = _loadHistory();
+        this.maxHistory = 20;
 
         var self = this;
 
@@ -22,6 +23,9 @@ angular.module('starter.services')
                 self.histories.splice(idx, 1);
             }
             self.histories.unshift(keyword);
+            while (self.histories.length > self.maxHistory) {
+                self.histories.pop();
+            }
             _saveHistory(self.histories);
         };
 
