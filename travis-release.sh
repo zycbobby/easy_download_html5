@@ -8,8 +8,6 @@ Usage:
 ------
    -h | --help
      Display this help
-   -v
-     specify version.
    -k
      specify keystore location
 END
@@ -24,10 +22,6 @@ case $key in
       myHelp
       exit
       ;;
-    -v|--version)
-    VERSION="$2"
-    shift # past argument
-    ;;
     -k|--keystore)
     KEYSTORE="$2"
     shift # past argument
@@ -37,13 +31,6 @@ case $key in
 esac
 shift # past argument or value
 done
-
-if [ -z ${VERSION} ]
-then
-    echo 'please specify version'
-    myHelp
-    exit -1
-fi
 
 if [ -z ${KEYSTORE} ]
 then
@@ -55,11 +42,11 @@ fi
 
 gulp remove-proxy
 
-if [ -e "easydownload-${VERSION}.apk" ]
+if [ -e "easydownload.apk" ]
 then
-    rm easydownload-${VERSION}.apk
+    rm easydownload.apk
 fi
 
 ionic build --release android
 echo $PASSWORD | jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $KEYSTORE ./platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name
-zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk easydownload-${VERSION}.apk
+zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk easydownload.apk
