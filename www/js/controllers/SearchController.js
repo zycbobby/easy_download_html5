@@ -18,6 +18,8 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             $ionicLoading.hide();
         };
 
+        $scope.maxArticles = 200;
+
         //if (!$rootScope.user) {
         //    $ionicUser.identify({
         //        user_id: $ionicUser.generateGUID()
@@ -83,13 +85,11 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         });
 
         Es.getRecentThing().then(function(things) {
-            var articles = [];
             for (var i = 0; i < things.length; i++) {
                 var thing = things[i];
-                articles.push(convertThingToArticle(thing));
+                $scope.articles.push(convertThingToArticle(thing));
 
             }
-            $scope.articles = articles;
         });
 
 
@@ -99,8 +99,20 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 description: thing.title,
                 picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
                 url: thing.source,
-                createdAt : new Date(thing.createdAt)
+                createdAt : new Date(thing.createdAt),
+                _createdAt: thing.createdAt
             };
+        }
+
+        $scope.loadMore = function() {
+            var lastArticle = $scope.articles[$scope.articles.length - 1];
+            Es.getRecentThing(lastArticle?lastArticle.createdAt: new Date()).then(function(things) {
+                for (var i = 0; i < things.length; i++) {
+                    var thing = things[i];
+                    $scope.articles.push(convertThingToArticle(thing));
+                }
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
         }
     }
 );

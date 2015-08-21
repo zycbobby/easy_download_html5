@@ -62,8 +62,16 @@ angular.module('starter.services')
             _listeners.splice(idx, 1);
         };
 
-        var getRecentThing = function () {
+        var getRecentThing = function ( noLateThan) {
+            var _noLateThan = noLateThan || new Date().toISOString();
             return $http.post(EsEndpoint.url, {
+                "query": {
+                    "range" : {
+                        "createdAt" : {
+                            "lt": _noLateThan
+                        }
+                    }
+                },
                 "sort": {
                     "createdAt": {"order": "desc"}
                 }
