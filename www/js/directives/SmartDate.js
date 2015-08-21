@@ -6,7 +6,7 @@ angular.module('starter.directives')
                 'time': '='
             },
             replace: true,
-            templateUrl: '../../templates/smart-date.html',
+            templateUrl: 'templates/smart-date.html',
             link: function(scope, element, attr){
 
                 scope.month = scope.time.getMonth() + 1;

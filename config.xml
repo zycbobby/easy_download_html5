@@ -3,10 +3,10 @@
         xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>EasyDownload</name>
     <description>
-        An Ionic Framework and Cordova project.
+        Find cheapest thing in China
     </description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">
-        Ionic Framework Team
+    <author email="zuo.yc@qq.com" href="http://zuoyuchu.sinaapp.com/">
+        Curry Zuo
     </author>
     <content src="index.html"/>
     <access origin="*"/>
