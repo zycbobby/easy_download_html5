@@ -13,7 +13,7 @@
                 <smart-date time="item.createdAt"></smart-date>
             </a>
             <ion-infinite-scroll
-                    ng-if="articles.length < maxArticles"
+                    ng-if="articles.length < maxArticles && isRecent"
                     on-infinite="loadMore()"
                     immediate-check="false"
                     distance="1%">

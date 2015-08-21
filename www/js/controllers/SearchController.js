@@ -59,6 +59,8 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
 
         $scope.articles = [];
 
+        $scope.isRecent = true;
+
         Es.listenSearchKeyword(historyService.onSearch);
 
         $scope.search = function (keyword) {
@@ -71,6 +73,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                         articles.push(convertThingToArticle(thing));
                     }
                 }
+                $scope.isRecent = false;
                 $scope.articles = articles;
             });
         };

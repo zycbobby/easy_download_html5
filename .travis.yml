@@ -1,4 +1,4 @@
-language: android
+language: android node_js
 android:
   components:
   - platform-tools
