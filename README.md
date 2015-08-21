@@ -4,6 +4,8 @@
 
 Ionic implementation of easy download client
 
+Notice: This project will be rewritten by react-native after it was released.
+
 # Functions
 
 ## Checking recently cheap stuffs
