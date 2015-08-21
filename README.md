@@ -18,5 +18,17 @@ It crawls things from smzdm.com and shihuo.cn
 
 It is also a search engine for searching the cheapest stuffs
 
+# Future plan
 
+## Purpose
+
+This project is non-commercial use, just for my technical interest in hybrid framework.
+
+## Rewritten
+
+Rewritten using react-native
+
+## Push
+
+It was hard to push in hybrid app, but I will implement it.
 
