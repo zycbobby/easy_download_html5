@@ -6,13 +6,13 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic','ionic.service.core','ionic.service.push','ngCordova', 'starter.controllers', 'starter.services', 'starter.directives'])
     .constant('EsEndpoint', {
-        url: 'http://localhost:8100/search'
+        url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
     })
     .constant('EasyDownloadEndpoint', {
-        userUrl: 'http://localhost:8100/users',
-        subscribeUrl: 'http://localhost:8100/users/_subscribe',
-        searchUrl: 'http://localhost:8100/historys/_search',
-        historyUrl: 'http://localhost:8100/historys'
+        userUrl: 'http://172.26.142.29:9000/api/users',
+        subscribeUrl: 'http://172.26.142.29:9000/api/users/_subscribe',
+        searchUrl: 'http://172.26.142.29:9000/api/historys/_search',
+        historyUrl: 'http://172.26.142.29:9000/api/historys'
     })
     .constant('debug', {
         isDebug: true,

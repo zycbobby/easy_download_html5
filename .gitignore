@@ -6,4 +6,5 @@ platforms/
 plugins/
 www/lib/
 .idea/
-easydownload.apk
+*.apk
+*.keystore
