@@ -26,11 +26,7 @@ before_script:
 script:
 - echo "Script stage"
 - ionic platform add android
-- cordova plugin add https://github.com/apache/cordova-plugin-console
-- cordova plugin add https://github.com/apache/cordova-plugin-splashscreen
-- cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-whitelist.git
-- cordova plugin add org.apache.cordova.device
-- cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
+- cordova plugin install
 after_success:
 - bash ./travis-release.sh -k my-release-key.keystore
 after_failure:
