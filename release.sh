@@ -54,6 +54,7 @@ fi
 
 
 gulp remove-proxy
+gulp inject-version
 
 if [ -e "easydownload-${VERSION}.apk" ]
 then

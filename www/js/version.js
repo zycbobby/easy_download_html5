@@ -1,1 +1,1 @@
-var globalVersionString = "v0.0.2";
+var globalVersionString = "v0.1.0";
