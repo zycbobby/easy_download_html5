@@ -16,16 +16,12 @@ before_install:
 - echo "Before install stage"
 install:
 - echo "Install stage"
-- echo "$VERSIONCODE"
-- echo "$TRAVIS_BUILD_NUMBER"
-- sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" config.xml
-- sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" package.json
 - nvm install 0.12.6
 - npm install
 - export PATH=$(npm bin):$PATH
+- export PATH=$ANDROID_HOME/build-tools/22.0.1:$PATH
 - bower install
 before_script:
-- sudo cp $ANDROID_HOME/build-tools/22.0.1/zipalign /bin/
 - echo "Before script stage"
 script:
 - echo "Script stage"
@@ -36,7 +32,7 @@ script:
 - cordova plugin add org.apache.cordova.device
 - cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
 after_success:
-- bash ./travis-release.sh -v 0.0.1 -k my-release-key.keystore
+- bash ./travis-release.sh -k my-release-key.keystore
 after_failure:
 - echo "After failure stage"
 after_script:
