@@ -6,12 +6,13 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
-
+var pjson = require('./package.json');
+var template = require('gulp-template');
 var paths = {
   sass: ['./scss/**/*.scss']
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'remove-proxy', 'inject-version']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/ionic.app.scss')
@@ -76,6 +77,13 @@ gulp.task('add-proxy', function() {
         recursive: false,
         silent: false
     });
+    replace({
+        regex: "https://api.github.com/repos/zycbobby/easy_download_html5/releases?access_token=1ef3730630641b51272e2d7b10e4bf2a86648fbc",
+        replacement: "http://localhost:8100/releases",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
 });
 
 gulp.task('remove-proxy', function() {
@@ -107,4 +115,18 @@ gulp.task('remove-proxy', function() {
         recursive: false,
         silent: false
     });
+    replace({
+        regex: "http://localhost:8100/releases",
+        replacement: "https://api.github.com/repos/zycbobby/easy_download_html5/releases?access_token=1ef3730630641b51272e2d7b10e4bf2a86648fbc",
+        paths: replaceFiles,
+        recursive: false,
+        silent: false
+    });
+});
+
+
+gulp.task('inject-version', function(){
+    return gulp.src('version.js')
+        .pipe(template({ versionString : pjson.version }))
+        .pipe(gulp.dest('www/js'));
 });

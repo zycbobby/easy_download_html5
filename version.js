@@ -1,0 +1,1 @@
+var globalVersionString = "v<%= versionString %>";

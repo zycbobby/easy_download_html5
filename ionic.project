@@ -25,6 +25,10 @@
     {
         "path": "/users/_subscribe",
         "proxyUrl": "http://172.26.142.29:9000/api/users/_subscribe"
+    },
+    {
+        "path": "/releases",
+        "proxyUrl": "https://api.github.com/repos/zycbobby/easy_download_html5/releases?access_token=1ef3730630641b51272e2d7b10e4bf2a86648fbc"
     }
   ]
 }
