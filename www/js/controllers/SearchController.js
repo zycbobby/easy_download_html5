@@ -99,8 +99,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 description: thing.title,
                 picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
                 url: thing.source,
-                createdAt : new Date(thing.createdAt),
-                _createdAt: thing.createdAt
+                createdAt : new Date(thing.createdAt)
             };
         }
 
