@@ -1,0 +1,46 @@
+language: android
+android:
+  components:
+  - platform-tools
+  - tools
+  - build-tools-19.0.0
+  - android-19
+sudo: false
+cache:
+  directories:
+  - node_modules
+  - src/lib
+before_install:
+- echo "Before install stage"
+install:
+- echo "Install stage"
+- sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" config.xml
+- sed -i -e "s/\$VERSIONCODE/$TRAVIS_BUILD_NUMBER/g" package.json
+- npm install
+- export PATH=$(npm bin):$PATH
+- bower install
+before_script:
+- echo "Before script stage"
+script:
+- echo "Script stage"
+- ionic platform add android
+- cordova plugin add https://github.com/apache/cordova-plugin-console
+- cordova plugin add https://github.com/apache/cordova-plugin-splashscreen
+- cordova plugin add https://git-wip-us.apache.org/repos/asf/cordova-plugin-whitelist.git
+- cordova plugin add org.apache.cordova.device
+- cordova plugin add https://github.com/driftyco/ionic-plugins-keyboard.git
+after_success:
+- bash ./release.sh -v 0.0.1 -k my-release-key.keystore
+after_failure:
+- echo "After failure stage"
+after_script:
+- echo "After script stage"
+deploy:
+  provider: releases
+  api_key:
+    secure: iEfAIOomzTtPrzfQq1+Hw4GAMN8G/txc0ES9MjdpUcHWvSRAJvjfQStcygZ32PsEMX9KarZo6IizfCw4jbmi/vpCA5TGsDIbt0Z7/tX/yf65pItetu5G1T1VSbEAD2Ov6WGZmqW0z2ZTjDAljSYCSryasew0I3D64a54YYa+UPOzMkfmyT/ZhvdgVBBG6x8KY/+ksrmRRLJ78sEf84khsfT8mHlqVb54JjJPeSt0bmiy7iHEkgLkB8lnmp/VhaEAkSTr+5ziR/HmIeFFcc3Yv/oYBiwy2bXo/pILwzGvMfL9pA0ybJbpcuOT9wj/oyG82iO9S8WkmehA3evcoTJ8pwT6D1zxbVXSPJZAdTjcwxdAsLJEPqAL6NBXNXO92b9k7yIdgUslGbY5PYQrV13lcylcIbZyUqUgLXwQyoRat9kE0Ef/U0Ce7qTC0DaT2j2/0gZYXyglzEsnVFe7Gvy7mk2IialaZgR7Dpixsy9eByzpUOJ5nJPuERnDLJLXCp1B1DDZkfh+WAjJ13Ho4+Y/uNvwLtrjrC51U/qnZh5ptVkrFnBOg0YzCLh9gkCgrFW1YKEU8Fgw4Q67bcProtBt8aVo/WMwfpua6ThxKe46zCDyKMll646G7X+V/pC6VqiyMUnhhY4Ec/oFEZ5XkMKJOY1abmwTX2g6Nm0KIWgqL5U=
+  file: platforms/android/ant-build/EasyDownload.apk
+  on:
+    tags: true
+    all_branches: true
+

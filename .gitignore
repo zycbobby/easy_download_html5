@@ -7,4 +7,3 @@ plugins/
 www/lib/
 .idea/
 *.apk
-*.keystore
