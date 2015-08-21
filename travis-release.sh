@@ -49,5 +49,22 @@ then
 fi
 
 ionic build --release android
+
+if [ $? -ne 0 ]
+then
+  exit 9
+fi
+
 echo $PASSWORD | jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore $KEYSTORE ./platforms/android/build/outputs/apk/android-release-unsigned.apk alias_name
+
+if [ $? -ne 0 ]
+then
+  exit 9
+fi
+
 zipalign -v 4 ./platforms/android/build/outputs/apk/android-release-unsigned.apk easydownload.apk
+
+if [ $? -ne 0 ]
+then
+  exit 9
+fi
