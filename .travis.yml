@@ -38,7 +38,7 @@ deploy:
   provider: releases
   api_key:
     secure: iEfAIOomzTtPrzfQq1+Hw4GAMN8G/txc0ES9MjdpUcHWvSRAJvjfQStcygZ32PsEMX9KarZo6IizfCw4jbmi/vpCA5TGsDIbt0Z7/tX/yf65pItetu5G1T1VSbEAD2Ov6WGZmqW0z2ZTjDAljSYCSryasew0I3D64a54YYa+UPOzMkfmyT/ZhvdgVBBG6x8KY/+ksrmRRLJ78sEf84khsfT8mHlqVb54JjJPeSt0bmiy7iHEkgLkB8lnmp/VhaEAkSTr+5ziR/HmIeFFcc3Yv/oYBiwy2bXo/pILwzGvMfL9pA0ybJbpcuOT9wj/oyG82iO9S8WkmehA3evcoTJ8pwT6D1zxbVXSPJZAdTjcwxdAsLJEPqAL6NBXNXO92b9k7yIdgUslGbY5PYQrV13lcylcIbZyUqUgLXwQyoRat9kE0Ef/U0Ce7qTC0DaT2j2/0gZYXyglzEsnVFe7Gvy7mk2IialaZgR7Dpixsy9eByzpUOJ5nJPuERnDLJLXCp1B1DDZkfh+WAjJ13Ho4+Y/uNvwLtrjrC51U/qnZh5ptVkrFnBOg0YzCLh9gkCgrFW1YKEU8Fgw4Q67bcProtBt8aVo/WMwfpua6ThxKe46zCDyKMll646G7X+V/pC6VqiyMUnhhY4Ec/oFEZ5XkMKJOY1abmwTX2g6Nm0KIWgqL5U=
-  file: easydownload.apk
+  file: ./platforms/android/build/outputs/apk/android-debug.apk
   on:
     tags: true
     all_branches: true
