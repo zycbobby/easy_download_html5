@@ -39,8 +39,6 @@ then
     exit -1
 fi
 
-echo $PASSWORD
-
 gulp remove-proxy
 
 gulp inject-version
