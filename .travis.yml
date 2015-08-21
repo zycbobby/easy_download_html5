@@ -26,8 +26,8 @@ before_script:
 - echo "Before script stage"
 script:
 - echo "Script stage"
-- ionic platform add android
 - cordova plugin install
+- ionic platform add android
 after_success:
 - bash ./travis-release.sh -k my-release-key.keystore
 after_failure:
