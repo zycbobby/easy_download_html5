@@ -5,6 +5,8 @@ android:
   - tools
   - build-tools-22.0.1
   - android-22
+node_js:
+  - "0.12"
 sudo: false
 env:
   global:
@@ -23,6 +25,7 @@ install:
 - export PATH=$(npm bin):$PATH
 - bower install
 before_script:
+- cp $ANDROID_HOME/build-tools/22.0.1/zipalign /bin/
 - echo "Before script stage"
 script:
 - echo "Script stage"
