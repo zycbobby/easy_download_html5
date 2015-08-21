@@ -51,6 +51,9 @@ fi
 
 ionic build --release android
 
+## Create debug apk
+ionic build android
+
 if [ $? -ne 0 ]
 then
   exit 9
