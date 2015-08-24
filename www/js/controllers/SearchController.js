@@ -6,62 +6,22 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
         // listen for the $ionicView.enter event:
-        //$scope.$on('$ionicView.enter', function(e) {
-        //});
+        $scope.$on('$ionicView.enter', function(e) {
+            $scope.query = {
+                keyword: ''
+            };
+            $scope.articles = [];
+            $scope.isRecent = true;
+            _initLoad();
+            Es.listenSearchKeyword(historyService.onSearch);
+        });
 
-        $scope.show = function () {
-            $ionicLoading.show({
-                template: 'Loading...'
-            });
-        };
-        $scope.hide = function () {
-            $ionicLoading.hide();
-        };
+        $scope.listCanSwipe = true;
+        $scope.shouldShowDelete = false;
+        $scope.shouldShowReorder = false;
 
         $scope.maxArticles = 200;
 
-        //if (!$rootScope.user) {
-        //    $ionicUser.identify({
-        //        user_id: $ionicUser.generateGUID()
-        //    }).then(function () {
-        //        // Register with the Ionic Push service.  All parameters are optional.
-        //        $ionicPush.register({
-        //            canShowAlert: true, //Can pushes show an alert on your screen?
-        //            canSetBadge: true, //Can pushes update app icon badges?
-        //            canPlaySound: true, //Can notifications play a sound?
-        //            canRunActionsOnWake: true, //Can run actions outside the app,
-        //            onNotification: function (notification) {
-        //                // Handle new push notifications here
-        //                console.log(notification);
-        //                return true;
-        //            }
-        //        });
-        //    });
-        //
-        //    $rootScope.$on('$cordovaPush:tokenReceived', function (event, data) {
-        //        console.log('Ionic Push: Got token ', data.token, data.platform);
-        //        var _user = {
-        //            name: data.token,
-        //            token: data.token,
-        //            platform: data.platform
-        //        };
-        //
-        //        userService.registerUser(_user).then(function (user) {
-        //            $rootScope.user = user;
-        //        });
-        //    });
-        //}
-
-
-        $scope.query = {
-            keyword: ''
-        };
-
-        $scope.articles = [];
-
-        $scope.isRecent = true;
-
-        Es.listenSearchKeyword(historyService.onSearch);
 
         $scope.search = function (keyword) {
             Es.searchThing(keyword).then(function (things) {
@@ -87,13 +47,25 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             Es.removeListener(historyService.onSearch);
         });
 
-        Es.getRecentThing().then(function(things) {
-            for (var i = 0; i < things.length; i++) {
-                var thing = things[i];
-                $scope.articles.push(convertThingToArticle(thing));
+        $scope.loadMore = function() {
+            var lastArticle = $scope.articles[$scope.articles.length - 1];
+            var articles = [];
+            Es.getRecentThing(lastArticle?lastArticle.createdAt: new Date()).then(function(things) {
+                for (var i = 0; i < things.length; i++) {
+                    var thing = things[i];
+                    articles.push(convertThingToArticle(thing));
+                }
+                [].push.apply($scope.articles, articles);
+                $scope.$broadcast('scroll.infiniteScrollComplete');
+            });
+        };
 
-            }
-        });
+        $scope.onSwipeDown = function(){
+
+            _initLoad().finally(function(){
+                $scope.$broadcast('scroll.refreshComplete');
+            });
+        };
 
 
         function convertThingToArticle(thing) {
@@ -106,15 +78,15 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             };
         }
 
-        $scope.loadMore = function() {
-            var lastArticle = $scope.articles[$scope.articles.length - 1];
-            Es.getRecentThing(lastArticle?lastArticle.createdAt: new Date()).then(function(things) {
+        function _initLoad() {
+            return Es.getRecentThing().then(function(things) {
                 for (var i = 0; i < things.length; i++) {
                     var thing = things[i];
                     $scope.articles.push(convertThingToArticle(thing));
                 }
-                $scope.$broadcast('scroll.infiniteScrollComplete');
+                return things;
             });
         }
+
     }
 );

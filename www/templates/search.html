@@ -4,21 +4,22 @@
             <i class="icon ion-search placeholder-icon"></i>
             <input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)">
         </label>
-
-        <div class="list">
-
-            <a class="item item-thumbnail-left" href="{{ item.url }}" ng-repeat="item in articles">
-                <img src="{{ item.picUrl !== undefined ? item.picUrl:'img/ionic.png' }}">
+        <ion-refresher
+                pulling-text="Pull to refresh..."
+                on-refresh="onSwipeDown()">
+        </ion-refresher>
+        <ion-list>
+            <ion-item class="item-thumbnail-left" href="{{ item.url }}" ng-repeat="item in articles" >
+                <img src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}">
                 <h2 style="white-space: normal">{{ item.title }}</h2>
                 <smart-date time="item.createdAt"></smart-date>
-            </a>
+            </ion-item>
             <ion-infinite-scroll
                     ng-if="articles.length < maxArticles && isRecent"
                     on-infinite="loadMore()"
                     immediate-check="false"
-                    distance="1%">
+                    distance="5%">
             </ion-infinite-scroll>
-            <div ng-if="articles.length >= maxArticles" style="text-align: center; padding: 8px;">There is more, but out of date</div>
-        </div>
+        </ion-list>
     </ion-content>
 </ion-view>
