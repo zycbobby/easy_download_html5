@@ -10,5 +10,8 @@
   },
   "dependencies": {
     "angular-imgcache.js": "~0.1.0"
+  },
+  "resolutions" : {
+    "angular": "1.4.3"
   }
 }
