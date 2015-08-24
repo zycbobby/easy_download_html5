@@ -16,14 +16,12 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             Es.listenSearchKeyword(historyService.onSearch);
         });
 
-        $scope.listCanSwipe = true;
-        $scope.shouldShowDelete = false;
-        $scope.shouldShowReorder = false;
-
         $scope.maxArticles = 200;
 
 
         $scope.search = function (keyword) {
+            console.log('perform search');
+            cordova.plugins.Keyboard.close();
             Es.searchThing(keyword).then(function (things) {
                 var articles = [];
                 for (var i = 0; i < things.length; i++) {

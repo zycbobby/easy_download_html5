@@ -2,8 +2,12 @@
     <ion-content lazy-scroll>
         <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)">
+            <input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)" />
+            <button type="button" class="button button-positive" on-tap="search(query.keyword)">
+                <i class="icon ion-search"></i>
+            </button>
         </label>
+
         <ion-refresher
                 pulling-text="Pull to refresh..."
                 on-refresh="onSwipeDown()">
