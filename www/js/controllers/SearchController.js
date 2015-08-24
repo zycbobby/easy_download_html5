@@ -79,6 +79,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         }
 
         function _initLoad() {
+            $scope.articles = [];
             return Es.getRecentThing().then(function(things) {
                 for (var i = 0; i < things.length; i++) {
                     var thing = things[i];

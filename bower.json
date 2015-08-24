@@ -7,5 +7,8 @@
     "ionic-service-core": "~0.1.10",
     "ngCordova": "~0.1.20-alpha",
     "ionic-service-push": "~0.1.13"
+  },
+  "dependencies": {
+    "angular-imgcache.js": "~0.1.0"
   }
 }

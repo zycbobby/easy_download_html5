@@ -1,5 +1,5 @@
 <ion-view view-title="Search">
-    <ion-content>
+    <ion-content lazy-scroll>
         <label class="item item-input">
             <i class="icon ion-search placeholder-icon"></i>
             <input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)">
@@ -8,10 +8,13 @@
                 pulling-text="Pull to refresh..."
                 on-refresh="onSwipeDown()">
         </ion-refresher>
+
         <ion-list>
-            <ion-item class="item-thumbnail-left" href="{{ item.url }}" ng-repeat="item in articles" >
-                <img src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}">
-                <h2 style="white-space: normal">{{ item.title }}</h2>
+            <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}" ng-repeat="item in articles">
+                <!--<img image-lazy-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}" image-lazy-loader="android" />-->
+                <!--<img image-lazy-src="{{ '/img/ionic.png' }}" image-lazy-loader="android" />-->
+                <img img-cache ic-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}"/>
+                <h2>{{ item.title }}</h2>
                 <smart-date time="item.createdAt"></smart-date>
             </ion-item>
             <ion-infinite-scroll
