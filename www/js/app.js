@@ -4,15 +4,16 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 'ngCordova', 'starter.controllers', 'starter.services', 'starter.directives', 'ImgCache'])
+angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 'ngCordova', 'starter.controllers',
+    'starter.services', 'starter.directives', 'ImgCache', 'jett.ionic.filter.bar', 'ionic-toast'])
     .constant('EsEndpoint', {
-        url: 'http://localhost:8100/search'
+        url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
     })
     .constant('EasyDownloadEndpoint', {
-        userUrl: 'http://localhost:8100/users',
-        subscribeUrl: 'http://localhost:8100/users/_subscribe',
-        searchUrl: 'http://localhost:8100/historys/_search',
-        historyUrl: 'http://localhost:8100/historys'
+        userUrl: 'http://172.26.142.29:9000/api/users',
+        subscribeUrl: 'http://172.26.142.29:9000/api/users/_subscribe',
+        searchUrl: 'http://172.26.142.29:9000/api/historys/_search',
+        historyUrl: 'http://172.26.142.29:9000/api/historys'
     })
     .constant('GithubEndpoint', {
         releaseUrl: 'https://api.github.com/repos/zycbobby/easy_download_html5/releases?access_token=1ef3730630641b51272e2d7b10e4bf2a86648fbc'
@@ -87,6 +88,11 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/search-window.html',
+                        controller: 'SearchWindowCtrl'
+                    },
+
+                    'extraOptions' : {
+                        templateUrl: 'templates/search-window-bar.html',
                         controller: 'SearchWindowCtrl'
                     }
                 }

@@ -1,10 +1,12 @@
 angular.module('starter.controllers').controller('SearchWindowCtrl', function ($scope, $rootScope, $stateParams,$ionicModal, $timeout,
                                                                          $ionicUser, $ionicPush, $ionicPlatform,
-                                                                               $ionicScrollDelegate,
+                                                                               $ionicScrollDelegate, $ionicFilterBar,ionicToast,
                                                                          $ionicLoading, userService, historyService, articleService, Es) {
         var Window = articleService.Window;
 
         $scope.window  = new Window();
+
+        // $ionicFilterBar.show();
 
         function loadingWrapper(promise) {
             $ionicLoading.show();
@@ -25,6 +27,8 @@ angular.module('starter.controllers').controller('SearchWindowCtrl', function ($
             loadingWrapper($scope.window.nextPage().then(function(window) {
                 $scope.window = window;
                 $scope.$broadcast('scroll.infiniteScrollComplete');
+
+                ionicToast.show('Next page', 'bottom', false, 1000);
             }));
         };
 
@@ -40,6 +44,7 @@ angular.module('starter.controllers').controller('SearchWindowCtrl', function ($
                 loadingWrapper($scope.window.prevPage().then(function(window) {
                     $scope.window = window;
                     $scope.$broadcast('scroll.refreshComplete');
+                    ionicToast.show('Prev page', 'top', false, 1000);
                 }));
             }
         };
