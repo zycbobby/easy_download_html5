@@ -75,10 +75,21 @@ angular.module('starter.services')
         };
 
         function convertThingToArticle(thing) {
+            var picUrl = (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '';
+            if (picUrl.endsWith('jpg')) {
+                if (picUrl.contains('zdmimg')) {
+                    var thumbnail = picUrl.replace('e600', 'd200');
+                } else if (picUrl.contains('hupucdn')) {
+                    var thumbnail = picUrl.replace('w/700', 'w/100');
+                } else if (picUrl.contains('hupucdn')) {
+                    var thumbnail = picUrl;
+                }
+            }
             return {
                 title: thing.title,
                 description: thing.title,
-                picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
+                picUrl: picUrl,
+                thumbnail: thumbnail,
                 url: thing.source,
                 createdAt : new Date(thing.createdAt)
             };

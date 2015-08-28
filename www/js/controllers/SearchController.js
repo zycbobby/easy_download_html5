@@ -45,11 +45,34 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             Es.removeListener(historyService.onSearch);
         });
 
+        if (!String.prototype.endsWith) {
+            String.prototype.endsWith = function(searchString, position) {
+                var subjectString = this.toString();
+                if (position === undefined || position > subjectString.length) {
+                    position = subjectString.length;
+                }
+                position -= searchString.length;
+                var lastIndex = subjectString.indexOf(searchString, position);
+                return lastIndex !== -1 && lastIndex === position;
+            };
+        }
+
         function convertThingToArticle(thing) {
+            var picUrl = (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '';
+            if (picUrl.endsWith('jpg')) {
+                if (picUrl.contains('zdmimg')) {
+                    var thumbnail = picUrl.replace('e600', 'd200');
+                } else if (picUrl.contains('hupucdn')) {
+                    var thumbnail = picUrl.replace('w/700', 'w/100');
+                } else if (picUrl.contains('hupucdn')) {
+                    var thumbnail = picUrl;
+                }
+            }
             return {
                 title: thing.title,
                 description: thing.title,
-                picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
+                picUrl: picUrl,
+                thumbnail: thumbnail,
                 url: thing.source,
                 createdAt : new Date(thing.createdAt)
             };
