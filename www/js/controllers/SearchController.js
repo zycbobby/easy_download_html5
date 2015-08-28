@@ -6,13 +6,23 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         // when they are recreated or on app start, instead of every page change.
         // To listen for when this page is active (for example, to refresh data),
         // listen for the $ionicView.enter event:
+
+        $scope.query = {
+            keyword: ''
+        };
+
+        $scope.articles = [];
+        $scope.isRecent = true;
+
         $scope.$on('$ionicView.enter', function(e) {
-            $scope.query = {
-                keyword: ''
-            };
-            $scope.articles = [];
-            $scope.isRecent = true;
-            _initLoad();
+
+            if ($stateParams.keyword) {
+                $scope.query.keyword = $stateParams.keyword;
+                $scope.search($stateParams.keyword);
+            } else {
+                _initLoad();
+            }
+
             Es.listenSearchKeyword(historyService.onSearch);
         });
 
@@ -21,7 +31,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
 
         $scope.search = function (keyword) {
             console.log('perform search');
-            cordova.plugins.Keyboard.close();
+            // cordova.plugins.Keyboard.close();
             Es.searchThing(keyword).then(function (things) {
                 var articles = [];
                 for (var i = 0; i < things.length; i++) {
@@ -35,11 +45,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 $scope.articles = articles;
             });
         };
-
-        if ($stateParams.keyword) {
-            $scope.query.keyword = $stateParams.keyword;
-            $scope.search($stateParams.keyword);
-        }
 
         $scope.$on('$ionicView.leave', function(){
             Es.removeListener(historyService.onSearch);
