@@ -79,7 +79,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         }
 
         function _initLoad() {
-            $ionicLoading.hide();
+            $ionicLoading.show();
             $scope.articles = [];
             return Es.getRecentThing().then(function(things) {
                 for (var i = 0; i < things.length; i++) {

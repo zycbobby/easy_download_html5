@@ -76,8 +76,8 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 url: '/search?keyword',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search.html',
-                        controller: 'SearchCtrl'
+                        templateUrl: 'templates/search-window.html',
+                        controller: 'SearchWindowCtrl'
                     }
                 }
             })

@@ -62,8 +62,9 @@ angular.module('starter.services')
             _listeners.splice(idx, 1);
         };
 
-        var getRecentThing = function ( noLateThan) {
+        var getRecentThing = function ( noLateThan, size) {
             var _noLateThan = noLateThan || new Date().toISOString();
+            var _size = size || 20;
             return $http.post(EsEndpoint.url, {
                 "query": {
                     "range" : {
@@ -74,7 +75,8 @@ angular.module('starter.services')
                 },
                 "sort": {
                     "createdAt": {"order": "desc"}
-                }
+                },
+                "size" : _size
 
             }, {
                 headers: {
