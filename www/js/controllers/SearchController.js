@@ -15,7 +15,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         $scope.isRecent = true;
 
         $scope.$on('$ionicView.enter', function(e) {
-
             if ($stateParams.keyword) {
                 $scope.query.keyword = $stateParams.keyword;
                 $scope.search($stateParams.keyword);
@@ -26,12 +25,10 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             Es.listenSearchKeyword(historyService.onSearch);
         });
 
-        $scope.maxArticles = 200;
-
+        $scope.maxArticles = 20;
 
         $scope.search = function (keyword) {
-            console.log('perform search');
-            // cordova.plugins.Keyboard.close();
+            $ionicLoading.show();
             Es.searchThing(keyword).then(function (things) {
                 var articles = [];
                 for (var i = 0; i < things.length; i++) {
@@ -43,6 +40,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 }
                 $scope.isRecent = false;
                 $scope.articles = articles;
+                $ionicLoading.hide();
             });
         };
 
@@ -64,7 +62,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         };
 
         $scope.onSwipeDown = function(){
-
             _initLoad().finally(function(){
                 $scope.$broadcast('scroll.refreshComplete');
             });
@@ -82,12 +79,14 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
         }
 
         function _initLoad() {
+            $ionicLoading.hide();
             $scope.articles = [];
             return Es.getRecentThing().then(function(things) {
                 for (var i = 0; i < things.length; i++) {
                     var thing = things[i];
                     $scope.articles.push(convertThingToArticle(thing));
                 }
+                $ionicLoading.hide();
                 return things;
             });
         }
