@@ -76,6 +76,16 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 url: '/search?keyword',
                 views: {
                     'menuContent': {
+                        templateUrl: 'templates/search.html',
+                        controller: 'SearchCtrl'
+                    }
+                }
+            })
+            .state('app.recent', {
+                cache: false,
+                url: '/recent',
+                views: {
+                    'menuContent': {
                         templateUrl: 'templates/search-window.html',
                         controller: 'SearchWindowCtrl'
                     }
@@ -102,7 +112,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 }
             });
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/search');
+        $urlRouterProvider.otherwise('/app/recent');
 
         // config the image cache
 

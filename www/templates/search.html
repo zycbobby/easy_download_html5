@@ -8,11 +8,6 @@
             </button>
         </label>
 
-        <ion-refresher
-                pulling-text="Pull to refresh..."
-                on-refresh="onSwipeDown()">
-        </ion-refresher>
-
         <ion-list>
             <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}" ng-repeat="item in articles">
                 <!--<img image-lazy-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}" image-lazy-loader="android" />-->
@@ -21,12 +16,6 @@
                 <h2>{{ item.title }}</h2>
                 <smart-date time="item.createdAt"></smart-date>
             </ion-item>
-            <ion-infinite-scroll
-                    ng-if="articles.length < maxArticles && isRecent && articles.length > 0"
-                    on-infinite="nextPage()"
-                    immediate-check="false"
-                    distance="5%">
-            </ion-infinite-scroll>
         </ion-list>
     </ion-content>
 </ion-view>

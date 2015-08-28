@@ -18,10 +18,7 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             if ($stateParams.keyword) {
                 $scope.query.keyword = $stateParams.keyword;
                 $scope.search($stateParams.keyword);
-            } else {
-                _initLoad();
             }
-
             Es.listenSearchKeyword(historyService.onSearch);
         });
 
@@ -48,26 +45,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
             Es.removeListener(historyService.onSearch);
         });
 
-        $scope.loadMore = function() {
-            var lastArticle = $scope.articles[$scope.articles.length - 1];
-            var articles = [];
-            Es.getRecentThing(lastArticle?lastArticle.createdAt: new Date()).then(function(things) {
-                for (var i = 0; i < things.length; i++) {
-                    var thing = things[i];
-                    articles.push(convertThingToArticle(thing));
-                }
-                [].push.apply($scope.articles, articles);
-                $scope.$broadcast('scroll.infiniteScrollComplete');
-            });
-        };
-
-        $scope.onSwipeDown = function(){
-            _initLoad().finally(function(){
-                $scope.$broadcast('scroll.refreshComplete');
-            });
-        };
-
-
         function convertThingToArticle(thing) {
             return {
                 title: thing.title,
@@ -77,19 +54,5 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 createdAt : new Date(thing.createdAt)
             };
         }
-
-        function _initLoad() {
-            $ionicLoading.show();
-            $scope.articles = [];
-            return Es.getRecentThing().then(function(things) {
-                for (var i = 0; i < things.length; i++) {
-                    var thing = things[i];
-                    $scope.articles.push(convertThingToArticle(thing));
-                }
-                $ionicLoading.hide();
-                return things;
-            });
-        }
-
     }
 );

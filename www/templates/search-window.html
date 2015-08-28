@@ -1,12 +1,12 @@
-<ion-view view-title="Search">
+<ion-view view-title="Recent">
     <ion-content lazy-scroll>
-        <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)"/>
-            <button type="button" class="button button-positive" on-tap="search(query.keyword)">
-                <i class="icon ion-search"></i>
-            </button>
-        </label>
+        <!--<label class="item item-input">-->
+            <!--<i class="icon ion-search placeholder-icon"></i>-->
+            <!--<input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)"/>-->
+            <!--<button type="button" class="button button-positive" on-tap="search(query.keyword)">-->
+                <!--<i class="icon ion-search"></i>-->
+            <!--</button>-->
+        <!--</label>-->
         <ion-refresher
                 ng-if="isRecent"
                 pulling-text="Pull to go prev page..."
@@ -16,8 +16,6 @@
         <ion-list ng-if="isRecent">
             <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}"
                       ng-repeat="item in window.window">
-                <!--<img image-lazy-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}" image-lazy-loader="android" />-->
-                <!--<img image-lazy-src="{{ '/img/ionic.png' }}" image-lazy-loader="android" />-->
                 <img img-cache ic-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}"/>
 
                 <h2>{{ item.title }}</h2>
