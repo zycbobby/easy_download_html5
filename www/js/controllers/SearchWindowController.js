@@ -10,7 +10,10 @@ angular.module('starter.controllers').controller('SearchWindowCtrl', function ($
 
         function loadingWrapper(promise) {
             $ionicLoading.show();
-            promise.finally(function(){
+            promise.catch(function(err){
+                ionicToast.show('Network problem', 'bottom', false, 1000);
+                $ionicLoading.hide();
+            }).finally(function(){
                 $ionicLoading.hide();
             });
         }
@@ -48,15 +51,5 @@ angular.module('starter.controllers').controller('SearchWindowCtrl', function ($
                 }));
             }
         };
-
-        function convertThingToArticle(thing) {
-            return {
-                title: thing.title,
-                description: thing.title,
-                picUrl: (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '',
-                url: thing.source,
-                createdAt : new Date(thing.createdAt)
-            };
-        }
     }
 );

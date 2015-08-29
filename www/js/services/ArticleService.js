@@ -52,12 +52,14 @@ angular.module('starter.services')
                 Es.getRecentThing(noLateThan).then(function(things) {
                     for (var i = 0; i < things.length; i++) {
                         var thing = things[i];
-                        self.articles.push(convertThingToArticle(thing));
+                        self.articles.push(self.convertThingToArticle(thing));
                     }
                     return things;
                 }).then(function(things) {
                     _this.window = self.articles.slice(_this.fromIdx, _this.toIdx);
                     defer.resolve(_this);
+                }).catch(function(err){
+                    defer.reject(err);
                 });
             }
 
@@ -74,15 +76,15 @@ angular.module('starter.services')
             return this._loadCurrentPage();
         };
 
-        function convertThingToArticle(thing) {
+        this.convertThingToArticle = function(thing) {
             var picUrl = (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '';
-            if (picUrl.endsWith('jpg')) {
-                if (picUrl.contains('zdmimg')) {
-                    var thumbnail = picUrl.replace('e600', 'd200');
-                } else if (picUrl.contains('hupucdn')) {
-                    var thumbnail = picUrl.replace('w/700', 'w/100');
-                } else if (picUrl.contains('hupucdn')) {
-                    var thumbnail = picUrl;
+            if (picUrl.indexOf('jpg') > -1 || picUrl.indexOf('png')) {
+                if (picUrl.indexOf('zdmimg') >= 0) {
+                    var thumbnail = 'img/logo_smzdm.png';
+                } else if (picUrl.indexOf('hupucdn') >= 0) {
+                    var thumbnail = 'img/logo_sh.png';
+                } else {
+                    var thumbnail = 'img/ic_photo_black_24dp.png';
                 }
             }
             return {

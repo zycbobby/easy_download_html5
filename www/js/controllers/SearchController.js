@@ -1,5 +1,6 @@
 angular.module('starter.controllers').controller('SearchCtrl', function ($scope, $rootScope, $stateParams,$ionicModal, $timeout,
                                                                          $ionicUser, $ionicPush, $ionicPlatform,
+                                                                         articleService, ionicToast,
                                                                          $ionicLoading, userService, historyService, Es) {
 
         // With the new view caching in Ionic, Controllers are only called
@@ -32,11 +33,14 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                     var thing = things[i];
                     var score = thing._score;
                     if (score > 4) {
-                        articles.push(convertThingToArticle(thing));
+                        articles.push(articleService.convertThingToArticle(thing));
                     }
                 }
                 $scope.isRecent = false;
                 $scope.articles = articles;
+            }).catch(function(err){
+                ionicToast.show('Network problem', 'bottom', false, 1000);
+            }).finally(function(){
                 $ionicLoading.hide();
             });
         };
@@ -54,27 +58,6 @@ angular.module('starter.controllers').controller('SearchCtrl', function ($scope,
                 position -= searchString.length;
                 var lastIndex = subjectString.indexOf(searchString, position);
                 return lastIndex !== -1 && lastIndex === position;
-            };
-        }
-
-        function convertThingToArticle(thing) {
-            var picUrl = (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '';
-            if (picUrl.endsWith('jpg')) {
-                if (picUrl.contains('zdmimg')) {
-                    var thumbnail = picUrl.replace('e600', 'd200');
-                } else if (picUrl.contains('hupucdn')) {
-                    var thumbnail = picUrl.replace('w/700', 'w/100');
-                } else if (picUrl.contains('hupucdn')) {
-                    var thumbnail = picUrl;
-                }
-            }
-            return {
-                title: thing.title,
-                description: thing.title,
-                picUrl: picUrl,
-                thumbnail: thumbnail,
-                url: thing.source,
-                createdAt : new Date(thing.createdAt)
             };
         }
     }
