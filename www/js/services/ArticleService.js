@@ -10,6 +10,8 @@ angular.module('starter.services')
             this.toIdx = 0;
             this.pageSize = 10;
             this.window = [];
+
+            this._max = this.pageSize * 10;
         };
 
         /**
@@ -31,6 +33,16 @@ angular.module('starter.services')
                 return this.init();
             }
             return this._loadCurrentPage();
+        };
+
+        /**
+         * return promise
+         */
+        this.Window.prototype.loadMore = function(){
+            this.toIdx += this.pageSize;
+            return this._loadCurrentPage().then(function(window) {
+
+            });
         };
 
         this.Window.prototype._hasEnoughArticles = function(){

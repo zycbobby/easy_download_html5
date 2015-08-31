@@ -1,0 +1,30 @@
+<ion-view view-title="Recent">
+    <ion-content lazy-scroll>
+        <!--<label class="item item-input">-->
+            <!--<i class="icon ion-search placeholder-icon"></i>-->
+            <!--<input type="text" placeholder="Search" ng-model="query.keyword" on-return="search(query.keyword)"/>-->
+            <!--<button type="button" class="button button-positive" on-tap="search(query.keyword)">-->
+                <!--<i class="icon ion-search"></i>-->
+            <!--</button>-->
+        <!--</label>-->
+        <ion-refresher
+                pulling-text="Pull to go prev page..."
+                on-refresh="onSwipeDown()">
+        </ion-refresher>
+
+        <ion-list>
+            <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}"
+                      collection-repeat="item in articles">
+                <img img-cache ic-src="{{ item.thumbnail !== undefined ? item.thumbnail:'img/ionic.png' }}"/>
+
+                <h2>{{ item.title }}</h2>
+                <smart-date time="item.createdAt"></smart-date>
+            </ion-item>
+            <ion-infinite-scroll
+                    ng-if="articles.length > 0 && articles.length < 100"
+                    on-infinite="loadMore()"
+                    immediate-check="false"
+                    distance="20%">
+        </ion-list>
+    </ion-content>
+</ion-view>

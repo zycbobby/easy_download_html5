@@ -8,17 +8,21 @@ angular.module('starter.directives')
             replace: true,
             templateUrl: 'templates/smart-date.html',
             link: function(scope, element, attr){
-
-                scope.month = scope.time.getMonth() + 1;
-                scope.day = scope.time.getDate();
-                scope.hour = scope.time.getHours();
-                if (scope.hour < 10) {
-                    scope.hour = '0' + scope.hour;
-                }
-                scope.minute = scope.time.getMinutes();
-                if (scope.minute < 10) {
-                    scope.minute = '0' + scope.minute;
-                }
+                var deRegister = scope.$watch('time', function(oldVal, newVal){
+                    if (newVal instanceof Date) {
+                        scope.month = newVal.getMonth() + 1;
+                        scope.day = newVal.getDate();
+                        scope.hour = newVal.getHours();
+                        if (scope.hour < 10) {
+                            scope.hour = '0' + scope.hour;
+                        }
+                        scope.minute = newVal.getMinutes();
+                        if (scope.minute < 10) {
+                            scope.minute = '0' + scope.minute;
+                        }
+                        deRegister();
+                    }
+                });
             }
         }
     });

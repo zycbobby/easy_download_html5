@@ -7,13 +7,13 @@
 angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 'ngCordova', 'starter.controllers',
     'starter.services', 'starter.directives', 'ImgCache', 'jett.ionic.filter.bar', 'ionic-toast'])
     .constant('EsEndpoint', {
-        url: 'http://es.misscatandzuozuo.info/mongoindex/thing/_search'
+        url: 'http://localhost:8100/search'
     })
     .constant('EasyDownloadEndpoint', {
-        userUrl: 'http://172.26.142.29:9000/api/users',
-        subscribeUrl: 'http://172.26.142.29:9000/api/users/_subscribe',
-        searchUrl: 'http://172.26.142.29:9000/api/historys/_search',
-        historyUrl: 'http://172.26.142.29:9000/api/historys'
+        userUrl: 'http://localhost:8100/users',
+        subscribeUrl: 'http://localhost:8100/users/_subscribe',
+        searchUrl: 'http://localhost:8100/historys/_search',
+        historyUrl: 'http://localhost:8100/historys'
     })
     .constant('GithubEndpoint', {
         releaseUrl: 'https://api.github.com/repos/zycbobby/easy_download_html5/releases?access_token=1ef3730630641b51272e2d7b10e4bf2a86648fbc'
@@ -87,13 +87,13 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 url: '/recent',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/recent.html',
-                        controller: 'SearchWindowCtrl'
+                        templateUrl: 'templates/recent-scroll.html',
+                        controller: 'RecentScrollCtrl'
                     },
 
                     'extraOptions' : {
                         templateUrl: 'templates/search-window-bar.html',
-                        controller: 'SearchWindowCtrl'
+                        controller: 'RecentScrollCtrl'
                     }
                 }
             })

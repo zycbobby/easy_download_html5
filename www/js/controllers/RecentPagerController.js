@@ -1,4 +1,4 @@
-angular.module('starter.controllers').controller('SearchWindowCtrl', function ($scope, $rootScope, $stateParams,$ionicModal, $timeout,
+angular.module('starter.controllers').controller('RecentPagerCtrl', function ($scope, $rootScope, $stateParams,$ionicModal, $timeout,
                                                                          $ionicUser, $ionicPush, $ionicPlatform,
                                                                                $ionicScrollDelegate, $ionicFilterBar,ionicToast,
                                                                          $ionicLoading, userService, historyService, articleService, Es) {

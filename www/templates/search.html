@@ -9,9 +9,7 @@
         </label>
 
         <ion-list>
-            <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}" ng-repeat="item in articles">
-                <!--<img image-lazy-src="{{ item.picUrl !== undefined ? item.picUrl:'/img/ionic.png' }}" image-lazy-loader="android" />-->
-                <!--<img image-lazy-src="{{ '/img/ionic.png' }}" image-lazy-loader="android" />-->
+            <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}" collection-repeat="item in articles">
                 <img img-cache ic-src="{{ item.thumbnail !== undefined ? item.thumbnail:'/img/ionic.png' }}"/>
                 <h2>{{ item.title }}</h2>
                 <smart-date time="item.createdAt"></smart-date>
