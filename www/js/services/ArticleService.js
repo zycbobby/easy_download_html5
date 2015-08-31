@@ -78,20 +78,11 @@ angular.module('starter.services')
 
         this.convertThingToArticle = function(thing) {
             var picUrl = (thing.info.images && thing.info.images.length > 0) ? thing.info.images[0].url : '';
-            if (picUrl.indexOf('jpg') > -1 || picUrl.indexOf('png')) {
-                if (picUrl.indexOf('zdmimg') >= 0) {
-                    var thumbnail = 'img/logo_smzdm.png';
-                } else if (picUrl.indexOf('hupucdn') >= 0) {
-                    var thumbnail = 'img/logo_sh.png';
-                } else {
-                    var thumbnail = 'img/ic_photo_black_24dp.png';
-                }
-            }
             return {
                 title: thing.title,
                 description: thing.title,
                 picUrl: picUrl,
-                thumbnail: thumbnail,
+                thumbnail: thing.thumbnail,
                 url: thing.source,
                 createdAt : new Date(thing.createdAt)
             };
