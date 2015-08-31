@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 url: '/recent',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/search-window.html',
+                        templateUrl: 'templates/recent.html',
                         controller: 'SearchWindowCtrl'
                     },
 
