@@ -1,0 +1,27 @@
+<ion-view view-title="Recent">
+    <ion-content lazy-scroll on-swipe-down="onSwipeDown()" on-swipe-up="onSwipeUp()">
+        <ion-refresher
+                pulling-text="Pull to go prev page..."
+                on-refresh="onSwipeDown()">
+        </ion-refresher>
+
+        <div class="list card" ng-repeat="item in articles">
+
+            <div class="item item-image">
+                <img ng-src="{{ item.thumbnail }}"/>
+            </div>
+
+            <div class="item">
+                <h2 class="item-title">{{ item.title }}</h2>
+                <smart-date time="item.createdAt"></smart-date>
+            </div>
+        </div>
+
+        <ion-infinite-scroll
+                ng-if="articles.length > 0 && articles.length < 100"
+                on-infinite="loadMore()"
+                immediate-check="false"
+                distance="20%">
+    </ion-content>
+    <button class="button button-positive icon ion-arrow-up-b float-btn" ng-click="scrollToTop()" ng-show="showToTopButton"></button>
+</ion-view>

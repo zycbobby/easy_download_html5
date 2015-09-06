@@ -6,6 +6,7 @@ angular.module('starter.controllers').controller('RecentScrollCtrl', function ($
 
         $scope.window  = new Window();
         $scope.articles = [];
+        $scope.showToTopButton = false;
 
         // $ionicFilterBar.show();
 
@@ -41,5 +42,18 @@ angular.module('starter.controllers').controller('RecentScrollCtrl', function ($
                 $scope.$broadcast('scroll.refreshComplete');
             }));
         };
+
+        $scope.scrollToTop = function(){
+            $ionicScrollDelegate.scrollTop(true);
+        };
+
+
+        $scope.onSwipeUp = function(){
+            $scope.showToTopButton = false;
+        };
+
+        $scope.onSwipeDown = function() {
+            $scope.showToTopButton = true;
+        }
     }
 );

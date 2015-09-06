@@ -1,1 +1,14 @@
 /* Empty. Add your own CSS if you like */
+
+.item h2 {
+    white-space: normal;
+}
+
+.float-btn {
+    border-radius: 50%;
+    position: fixed;
+    bottom: 20px; /* Adjust to where you want it */
+    right: 20px; /* Adjust to where you want it */
+    z-index: 9999;
+    opacity: 0.5;
+}

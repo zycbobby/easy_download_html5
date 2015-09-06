@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'ionic.service.core', 'ionic.service.push', 
                 url: '/recent',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/recent-scroll.html',
+                        templateUrl: 'templates/recent-card.html',
                         controller: 'RecentScrollCtrl'
                     },
 
