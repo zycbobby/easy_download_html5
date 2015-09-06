@@ -15,7 +15,8 @@
         <ion-list>
             <ion-item class="item-thumbnail-left item-text-wrap" href="{{ item.url }}"
                       collection-repeat="item in articles">
-                <img img-cache ic-src="{{ item.thumbnail !== undefined ? item.thumbnail:'img/ionic.png' }}"/>
+                <!--<img img-cache ic-src="{{ item.thumbnail !== undefined ? item.thumbnail:'img/ionic.png' }}"/>-->
+                <img ng-src="{{ item.thumbnail }}"/>
 
                 <h2>{{ item.title }}</h2>
                 <smart-date time="item.createdAt"></smart-date>
