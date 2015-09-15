@@ -28,6 +28,10 @@ This project is non-commercial use, just for my technical interest in hybrid fra
 
 Rewritten using react-native
 
+2015-9-15
+
+ReactNative for Android has been release.
+
 ## Push
 
 It was hard to push in hybrid app, but I will implement it.
